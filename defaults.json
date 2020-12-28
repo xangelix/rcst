@@ -1,0 +1,6 @@
+{
+    "dst_route": null,
+    "dst_dst": null,
+    "direct_link": true,
+    "notif_decay_time": 250000
+}
