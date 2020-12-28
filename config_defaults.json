@@ -2,5 +2,7 @@
     "dst_route": null,
     "dst_dir": null,
     "direct_link": true,
-    "notif_decay_time": 250000
+    "notif_decay_time": 250000,
+    "name": "Name",
+    "icon": "cloud-upload"
 }
