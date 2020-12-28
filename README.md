@@ -31,7 +31,7 @@ Right click on any file
 
 ## Storage providers
 
-    All rclone providers! (below updated from https://github.com/rclone/rclone/ on 2020-12-28)
+All rclone providers! (below updated from https://github.com/rclone/rclone/ on 2020-12-28)
 
   * 1Fichier [:page_facing_up:](https://rclone.org/fichier/)
   * Alibaba Cloud (Aliyun) Object Storage System (OSS) [:page_facing_up:](https://rclone.org/s3/#alibaba-oss)
