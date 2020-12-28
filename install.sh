@@ -15,6 +15,12 @@ sudo rm -f /usr/share/kservices5/ServiceMenus/rclone_share_tools.desktop
 
 sudo cp $BASE_DIR/temp.desktop /usr/share/kservices5/ServiceMenus/rclone_share_tools.desktop
 
+touch $BASE_DIR/config.json
+echo "{}" > $BASE_DIR/config.json
+
+touch $BASE_DIR/history.json
+echo "{}" > $BASE_DIR/history.json
+
 rm $BASE_DIR/temp.desktop
 
 echo "Done"
