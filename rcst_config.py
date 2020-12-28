@@ -2,12 +2,30 @@
 
 # Imports
 import os, json
+import argparse
 
 info = 'INF: '
 sets = 'SET: '
 error = 'ERR: '
 
-def prop_in(conf, prop):
+parser = argparse.ArgumentParser()
+parser.add_argument('new_num_dst')
+args = parser.parse_args()
+
+num_dst = int(args.new_num_dst)
+
+def fix_type(cap: str, typ: str):
+    if (typ == 'str'):
+        return cap
+    elif (typ == 'bool'):
+        return (cap in ['True', 'true', 'TRUE', 't', 'T', 'y', 'Y'])
+    elif (typ == 'int'):
+        return int(cap)
+    else:
+        print(f'{error}Invalid type specified.')
+        exit(1)
+
+def prop_in(conf, prop, typ):
     val = ''
     cap = ''
 
@@ -36,7 +54,7 @@ def prop_in(conf, prop):
             else:
                 break
         else:
-            conf.update({prop: cap})
+            conf.update({prop: fix_type(cap, typ)})
             break
 
 # Get Working Directory
@@ -52,11 +70,37 @@ config = {}
 with open(f'{working_dir}/config.json') as f:
     config = json.load(f)
 
-# Set properties
-prop_in(config, 'dst_route')
-prop_in(config, 'dst_dir')
-prop_in(config, 'direct_link')
-prop_in(config, 'notif_decay_time')
 
-with open(f'{working_dir}/config.json', 'w', encoding='utf-8') as f:
-    json.dump(config, f, ensure_ascii=False, indent=4)
+try:
+    temp = config['destinations']
+except:
+    config.update({'destinations': []})
+
+
+
+for i in range(num_dst - len(config['destinations'])):
+    config['destinations'].append({})
+
+for i in range(num_dst):
+    try:
+        config['latest_index'] += 1
+    except Exception:
+        config.update({'latest_index': 0})
+
+    # Set properties
+    prop_in(config['destinations'][i], 'name', 'str')
+    prop_in(config['destinations'][i], 'icon', 'str')
+    prop_in(config['destinations'][i], 'dst_route', 'str')
+    prop_in(config['destinations'][i], 'dst_dir', 'str')
+    prop_in(config['destinations'][i], 'direct_link', 'bool')
+    prop_in(config['destinations'][i], 'notif_decay_time', 'int')
+
+    try:
+        ['destinations'][i]['id'] = i
+    except:
+        config['destinations'][i].update({'id': config['latest_index']})
+
+
+    # Save config
+    with open(f'{working_dir}/config.json', 'w', encoding='utf-8') as f:
+        json.dump(config, f, ensure_ascii=False, indent=4)
