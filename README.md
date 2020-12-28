@@ -3,9 +3,9 @@
 ## Prerequisites
 
 - Python ^3.9.1
-- pip3 ^20.2.2
-    - argparse ^1.4.0
-    - pyperclip ^1.8.1
+  - pip3 ^20.2.2
+      - argparse ^1.4.0
+      - pyperclip ^1.8.1
 
 
 ## Installation
