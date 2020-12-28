@@ -1,27 +1,29 @@
 ## TODO (sort by priority)
 
--Full variable support
+- Full variable support
 
--Fix for spaces in name
+- Fix for spaces in name
 
--Debug catch and verbosity
+- Debug catch and verbosity
 
--Folder upload support
+- Folder upload support
 
--Multi-file upload support
+- Multi-file upload support
 
--Add destination support
+- Add destination support
 
--AUR-based installer
+- AUR-based installer
 
--Add additional metadata to history log
+- Add additional metadata to history log
 
--Directory organization on dst
+- Directory organization on dst
 
--Local copy options
+- Local copy options
 
--Hash-check support
+- Hash-check support
 
--Save backup of history in case fails
+- Save backup of history in case fails
+
+- Uploading file to same path modifies file but keeps link the same
 
 - JSON Schema definition
