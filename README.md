@@ -1,10 +1,23 @@
 # RClone Share Tools
 
+## Prerequisites
+
+-Python ^3.9.1
+-pip3 ^20.2.2
+--argparse ^1.4.0
+--pyperclip ^1.8.1
+
+
 ## Installation
 
 1. Confirm your rclone routes are functional
 
-2. Install RClone Share Tools with:
+2. Install prerequisites with python 
+```bash
+python -m pip install -r requirements.txt
+```
+
+3. Install RClone Share Tools with:
 ```bash
 ./install.py <NUM_ROUTES_TO_ADD>
 ```
