@@ -8,7 +8,7 @@ def debug(str):
 
 # Imports
 import os, subprocess, json, datetime
-import argparse, pyperclip, isodate
+import argparse, pyperclip
 
 working_dir = os.path.dirname(os.path.realpath(__file__))
 
