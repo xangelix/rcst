@@ -27,6 +27,7 @@ Right click on any file
 - Uploading file to same path modifies file but keeps link the same
 - JSON Schema definition
 - Combine json defaults file into config
+- Type checking
 
 
 ## Known Issues
