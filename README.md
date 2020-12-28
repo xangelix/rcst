@@ -2,8 +2,11 @@
 
 ## Installation
 
+1. Confirm your rclone routes are functional
+
+2. Install RClone Share Tools with:
 ```bash
-./install.py <RCLONE_ROUTE> <DST_DIR>
+./install.py <NUM_ROUTES_TO_ADD>
 ```
 
 ## Usage
