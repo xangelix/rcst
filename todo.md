@@ -21,3 +21,5 @@
 -Local copy options
 
 -Hash-check support
+
+-Save backup of history in case fails
