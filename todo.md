@@ -23,3 +23,5 @@
 -Hash-check support
 
 -Save backup of history in case fails
+
+-Uploading file to same path modifies file but keeps link the same
