@@ -20,4 +20,8 @@
 
 -Add additional metadata to history log
 
+-Directory organization on dst
+
+-Local copy options
+
 -Hash-check support
