@@ -16,8 +16,6 @@
 
 -Rewrite in python?
 
--Rewrite history log to JSON
-
 -Add additional metadata to history log
 
 -Directory organization on dst

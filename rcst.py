@@ -7,12 +7,25 @@ def debug(str):
         print(str)
 
 # Imports
-import os, subprocess
+import os, subprocess, json
 import argparse, pyperclip
+
+working_dir = os.path.dirname(os.path.realpath(__file__))
 
 #TODO: Add notif_decay_time to config
 
 notif_decay_time = 25000
+direct_link = True
+
+# Load config
+config = {}
+with open(f'{working_dir}/config.json') as f:
+    config = json.load(f)
+
+# Load current history
+history = {}
+with open(f'{working_dir}/history.json') as f:
+    history = json.load(f)
 
 # Parsing arguments
 parser = argparse.ArgumentParser()
@@ -48,12 +61,24 @@ rc_link_proc = subprocess.run(['rclone',
 
 rc_link = rc_link_proc.stdout.rstrip().decode('UTF-8')
 
+if (direct_link):
+    rc_link = rc_link.replace('https://drive.google.com/open?id=', 'https://drive.google.com/uc?id=')
+
 debug(rc_link)
 
 pyperclip.copy(rc_link)
 
-with open("history.json", "a") as history_f:
-    history_f.write(f'{rc_link}\n')
+if 'uploads' not in history:
+    history.update({'uploads': []})
+
+upload = {}
+upload.update({'link': rc_link})
+upload.update({'name': basename})
+
+history['uploads'].append(upload)
+
+with open(f'{working_dir}/history.json', 'w', encoding='utf-8') as f:
+    json.dump(history, f, ensure_ascii=False, indent=4)
 
 notification = subprocess.run(['notify-send',
                                 '--app-name=RCShareTools',
