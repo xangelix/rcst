@@ -10,7 +10,7 @@ def debug(str):
 import os, subprocess
 import argparse, pyperclip
 
-# Add notif_decay_time to config
+#TODO: Add notif_decay_time to config
 
 notif_decay_time = 25000
 
