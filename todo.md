@@ -14,8 +14,6 @@
 
 -AUR-based installer
 
--Rewrite in python?
-
 -Add additional metadata to history log
 
 -Directory organization on dst
