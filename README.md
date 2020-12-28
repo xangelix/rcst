@@ -27,6 +27,7 @@ Right click on any file
 - JSON Schema definition
 - Combine json defaults file into config
 - Type checking
+- Fix exception rules
 
 
 ## Known Issues
