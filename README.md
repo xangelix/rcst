@@ -15,6 +15,7 @@ Right click on any file
 
 ## TODO (sort by priority)
 
+- Delete destination support
 - Fix for spaces in name
 - Debug catch and verbosity
 - Folder upload support
