@@ -12,7 +12,6 @@ Right click on any file
 
 ## TODO (sort by priority)
 
-- Full variable support
 - Fix for spaces in name
 - Debug catch and verbosity
 - Folder upload support
