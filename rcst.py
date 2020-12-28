@@ -7,8 +7,8 @@ def debug(str):
         print(str)
 
 # Imports
-import os, subprocess, json
-import argparse, pyperclip
+import os, subprocess, json, datetime
+import argparse, pyperclip, isodate
 
 working_dir = os.path.dirname(os.path.realpath(__file__))
 
@@ -72,8 +72,30 @@ if 'uploads' not in history:
     history.update({'uploads': []})
 
 upload = {}
+utc_now = datetime.datetime.now(datetime.timezone.utc)
+upload.update({'upload_time': utc_now.strftime("UTC-%Y-%m-%d-%H-%S-%f")})
+
+exp_day = 0
+exp_hour = 5
+exp_min = 0
+exp_sec = 0
+
+exp_day_delta = datetime.timedelta(days=exp_day)
+exp_hour_delta = datetime.timedelta(hours=exp_hour)
+exp_min_delta = datetime.timedelta(minutes=exp_min)
+exp_sec_delta = datetime.timedelta(days=exp_sec)
+
+total_time_delta = exp_day_delta + exp_hour_delta + exp_min_delta + exp_sec_delta
+
+if (total_time_delta == 0):
+    upload.update({'expiration': 'none'})
+else:
+    exp_now = utc_now + total_time_delta
+    upload.update({'expiration': exp_now.strftime("UTC-%Y-%m-%d-%H-%S-%f")})
+
 upload.update({'link': rc_link})
 upload.update({'name': basename})
+upload.update({'upload_src': file_path})
 
 history['uploads'].append(upload)
 
