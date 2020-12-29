@@ -10,11 +10,20 @@ echo "WARN: Moving this directory after install will cause failure."
 # Finds the path of this install.sh
 BASE_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 
-touch $BASE_DIR/config.json
-echo "{}" > $BASE_DIR/config.json
+if [ -f "$BASE_DIR/config.json" ]; then
+    echo "$BASE_DIR/config.json exists."
+else
+    echo "$FILE does not exist."
+    touch $BASE_DIR/config.json
+    echo "{}" > $BASE_DIR/config.json
+fi
 
-touch $BASE_DIR/history.json
-echo "{}" > $BASE_DIR/history.json
+if [ -f "$BASE_DIR/history.json" ]; then
+    echo "$BASE_DIR/history.json exists."
+else
+    touch $BASE_DIR/history.json
+    echo "{}" > $BASE_DIR/history.json
+fi
 
 ./rcst_config.py $1
 ./rcst_build.py
