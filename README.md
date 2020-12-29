@@ -2,6 +2,8 @@
 
 ## Prerequisites
 
+- KDE Plasma ^5 (tested on 5.20.4) 
+- KDE Frameworks ^5 (tested on 5.77.0)
 - Python ^3.9.1
   - pip3 ^20.2.2
       - argparse ^1.4.0
