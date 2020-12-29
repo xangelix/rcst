@@ -77,15 +77,12 @@ except:
     config.update({'destinations': []})
 
 
-
-for i in range(num_dst - len(config['destinations'])):
+for i in range(num_dst):
     config['destinations'].append({})
 
-for i in range(num_dst):
-    try:
-        config['latest_index'] += 1
-    except Exception:
-        config.update({'latest_index': 0})
+fin_len = len(config['destinations'])
+
+for i in range(fin_len):
 
     # Set properties
     prop_in(config['destinations'][i], 'name', 'str')
@@ -95,12 +92,12 @@ for i in range(num_dst):
     prop_in(config['destinations'][i], 'direct_link', 'bool')
     prop_in(config['destinations'][i], 'notif_decay_time', 'int')
 
-    try:
-        ['destinations'][i]['id'] = i
-    except:
-        config['destinations'][i].update({'id': config['latest_index']})
 
+for i in range(fin_len):
+    config['destinations'][i].update({'id': i})
 
-    # Save config
-    with open(f'{working_dir}/config.json', 'w', encoding='utf-8') as f:
-        json.dump(config, f, ensure_ascii=False, indent=4)
+config.update({'size': fin_len})
+
+# Save config
+with open(f'{working_dir}/config.json', 'w', encoding='utf-8') as f:
+    json.dump(config, f, ensure_ascii=False, indent=4)
