@@ -20,13 +20,11 @@ else
     echo "{}" > $BASE_DIR/history.json
 fi
 
-konsole -e "$BASE_DIR/rcst_config.py add"
-konsole -e "$BASE_DIR/rcst_build.py"
+konsole -e "python3 $BASE_DIR/rcst_config.py add"
+python3 $BASE_DIR/rcst_build.py
 
-sudo chmod +x $BASE_DIR/rcst.py
+pkexec --user root rm -f /usr/share/kservices5/ServiceMenus/rclone_share_tools.desktop
 
-sudo rm -f /usr/share/kservices5/ServiceMenus/rclone_share_tools.desktop
-
-sudo cp $BASE_DIR/rclone_share_tools.desktop /usr/share/kservices5/ServiceMenus/rclone_share_tools.desktop
+pkexec --user root cp $BASE_DIR/rclone_share_tools.desktop /usr/share/kservices5/ServiceMenus/rclone_share_tools.desktop
 
 echo "Done"

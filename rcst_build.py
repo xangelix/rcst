@@ -39,7 +39,7 @@ X-KDE-Submenu=rclone To...
 
 footer = f"""
 [Desktop Action Cfg]
-Exec=kdialog --msgbox "Not implemented yet :("
+Exec={working_dir}/edit.sh
 Name=Configure Destinations...
 Icon=kstars_satellites
 
