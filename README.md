@@ -19,9 +19,14 @@
 python -m pip install -r requirements.txt
 ```
 
-3. Install RClone Share Tools with:
+3. Add an RClone Share Tools item with:
 ```bash
-./install.py <NUM_ROUTES_TO_ADD>
+./add.py
+```
+
+4. (Optional) Edit an RClone Share Tools item with:
+```bash
+./edit.py
 ```
 
 ## Usage

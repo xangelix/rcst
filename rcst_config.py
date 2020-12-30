@@ -12,7 +12,13 @@ parser = argparse.ArgumentParser()
 parser.add_argument('new_num_dst')
 args = parser.parse_args()
 
-num_dst = int(args.new_num_dst)
+#num_dst = int(args.new_num_dst)
+num_dst = 0
+if (args.new_num_dst == 'add'):
+    num_dst = 1
+    print(f'{info}Adding 1 new destination...')
+elif (args.new_num_dst != 'edit'):
+    quit(1)
 
 def fix_type(cap: str, typ: str):
     if (typ == 'str'):
@@ -83,6 +89,8 @@ for i in range(num_dst):
 fin_len = len(config['destinations'])
 
 for i in range(fin_len):
+
+    print(f'{info}Modiying object: {i + 1} / {fin_len}')
 
     # Set properties
     prop_in(config['destinations'][i], 'name', 'str')

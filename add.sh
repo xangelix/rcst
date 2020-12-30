@@ -1,10 +1,5 @@
 #!/usr/bin/bash
 
-if [ "$#" -ne 1 ]; then
-    echo "You must enter exactly 1 argument"
-    exit
-fi
-
 echo "WARN: Moving this directory after install will cause failure."
 
 # Finds the path of this install.sh
@@ -25,8 +20,8 @@ else
     echo "{}" > $BASE_DIR/history.json
 fi
 
-./rcst_config.py $1
-./rcst_build.py
+konsole -e "$BASE_DIR/rcst_config.py add"
+konsole -e "$BASE_DIR/rcst_build.py"
 
 sudo chmod +x $BASE_DIR/rcst.py
 

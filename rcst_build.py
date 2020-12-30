@@ -44,7 +44,7 @@ Name=Configure Destinations...
 Icon=kstars_satellites
 
 [Desktop Action AddDst]
-Exec=kdialog --msgbox "Not implemented yet :("
+Exec={working_dir}/add.sh
 Name=Add Destination...
 Icon=format-add-node
 """
