@@ -4,6 +4,10 @@ image:
 ports:
   - port: 6080
     onOpen: open-preview
+  - port: 5900
+    onOpen: ignore
+  - port: 1716 
+    onOpen: ignore
 
 tasks:
   - command: kstart5 plasmashell > /dev/null 2>&1 & disown
