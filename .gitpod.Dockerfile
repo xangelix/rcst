@@ -11,6 +11,6 @@ USER gitpod
 #
 # More information: https://www.gitpod.io/docs/config-docker/
 
-RUN sudo apt -yq update && sudo apt upgrade -yq && \
-    sudo apt install -yq ubuntu-minimal ubuntu-standard kde-plasma-desktop && \
+RUN sudo apt update && sudo apt upgrade -yq && \
+    DEBIAN_FRONTEND=noninteractive sudo apt install -yq ubuntu-minimal ubuntu-standard kde-plasma-desktop && \
     sudo apt install -yq rclone
