@@ -18,6 +18,6 @@ RUN sudo apt update && sudo apt upgrade -yq && python -m pip install --upgrade p
     echo keyboard-configuration keyboard-configuration/layoutcode select 'us' | sudo debconf-set-selections && \
     echo "resolvconf resolvconf/linkify-resolvconf boolean false" | sudo debconf-set-selections && \
     export DEBIAN_FRONTEND=noninteractive && sudo apt install -yq ubuntu-minimal ubuntu-standard kde-plasma-desktop && \
-    sudo apt install -yq rclone libnotify
+    sudo apt install -yq rclone libnotify-bin
 
 ENV RCLONE_CONF="x11"
