@@ -10,4 +10,6 @@ ports:
     onOpen: ignore
 
 tasks:
-  - command: kstart5 plasmashell > /dev/null 2>&1 & disown
+  - command: |
+      echo $RCLONE_CONF | base64 --decode > /home/gitpod/.config/rclone/rclone.conf
+      kstart5 plasmashell > /dev/null 2>&1 & disown
