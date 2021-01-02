@@ -21,12 +21,12 @@ python -m pip install -r requirements.txt
 
 3. Add an RClone Share Tools item with:
 ```bash
-./add.py
+./add.sh
 ```
 
 4. (Optional) Edit an RClone Share Tools item with:
 ```bash
-./edit.py
+./edit.sh
 ```
 
 ## Usage
