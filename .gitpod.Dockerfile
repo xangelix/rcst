@@ -20,4 +20,4 @@ RUN sudo apt update && sudo apt upgrade -yq && python -m pip install --upgrade p
     export DEBIAN_FRONTEND=noninteractive && sudo apt install -yq ubuntu-minimal ubuntu-standard kde-plasma-desktop && \
     sudo apt install -yq rclone libnotify-bin
 
-ENV RCLONE_CONF="x11"
+ENV XDG_SESSION_TYPE="x11"
