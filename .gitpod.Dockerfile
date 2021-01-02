@@ -18,5 +18,4 @@ RUN sudo apt update && sudo apt upgrade -yq && \
     echo keyboard-configuration keyboard-configuration/layoutcode select 'us' | sudo debconf-set-selections && \
     echo "resolvconf resolvconf/linkify-resolvconf boolean false" | sudo debconf-set-selections && \
     export DEBIAN_FRONTEND=noninteractive && sudo apt install -yq ubuntu-minimal ubuntu-standard kde-plasma-desktop && \
-    sudo apt install -yq rclone && \
-    kstart5 plasmashell
+    sudo apt install -yq rclone
