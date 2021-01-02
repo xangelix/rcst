@@ -11,11 +11,13 @@ USER gitpod
 #
 # More information: https://www.gitpod.io/docs/config-docker/
 
-RUN sudo apt update && sudo apt upgrade -yq && \
+RUN sudo apt update && sudo apt upgrade -yq && python -m pip install --upgrade pip && \
     sudo apt -yq install debconf-utils && \
     echo 'debconf debconf/frontend select Noninteractive' | sudo debconf-set-selections && \
     echo keyboard-configuration keyboard-configuration/layout select 'English (US)' | sudo debconf-set-selections && \
     echo keyboard-configuration keyboard-configuration/layoutcode select 'us' | sudo debconf-set-selections && \
     echo "resolvconf resolvconf/linkify-resolvconf boolean false" | sudo debconf-set-selections && \
     export DEBIAN_FRONTEND=noninteractive && sudo apt install -yq ubuntu-minimal ubuntu-standard kde-plasma-desktop && \
-    sudo apt install -yq rclone
+    sudo apt install -yq rclone libnotify
+
+ENV RCLONE_CONF="x11"
