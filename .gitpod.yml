@@ -14,3 +14,4 @@ tasks:
       rclone config file
       echo $RCLONE_CONF | base64 --decode > /home/gitpod/.config/rclone/rclone.conf
       kstart5 plasmashell > /dev/null 2>&1 & disown
+      python -m pip install -r requirements.txt
