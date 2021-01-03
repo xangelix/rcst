@@ -23,8 +23,8 @@ fi
 konsole -e "python3 $BASE_DIR/rcst_config.py add"
 python3 $BASE_DIR/rcst_build.py
 
-pkexec --user root rm -f /usr/share/kservices5/ServiceMenus/rclone_share_tools.desktop
+SUDO_ASKPASS=/usr/bin/ksshaskpass sudo -A rm -f /usr/share/kservices5/ServiceMenus/rclone_share_tools.desktop
 
-pkexec --user root cp $BASE_DIR/rclone_share_tools.desktop /usr/share/kservices5/ServiceMenus/rclone_share_tools.desktop
+SUDO_ASKPASS=/usr/bin/ksshaskpass sudo -A cp $BASE_DIR/rclone_share_tools.desktop /usr/share/kservices5/ServiceMenus/rclone_share_tools.desktop
 
 echo "Done"
