@@ -2,7 +2,7 @@ FROM gitpod/workspace-full:latest
 MAINTAINER Cody Neiman <cody.neiman@yale.edu>
 
 # Install Xvfb, JavaFX-helpers and Openbox window manager
-RUN sudo apt update && \
+RUN sudo apt-get update && \
     sudo apt-get install -yq xvfb x11vnc xterm openjfx libopenjfx-java openbox && \
     sudo rm -rf /var/lib/apt/lists/*
 
@@ -46,7 +46,7 @@ USER gitpod
 #
 # More information: https://www.gitpod.io/docs/config-docker/
 
-RUN sudo apt upgrade -yq && python -m pip install --upgrade pip && \
+RUN sudo apt update && sudo apt upgrade -yq && python -m pip install --upgrade pip && \
     sudo apt -yq install debconf-utils && \
     echo 'debconf debconf/frontend select Noninteractive' | sudo debconf-set-selections && \
     echo keyboard-configuration keyboard-configuration/layout select 'English (US)' | sudo debconf-set-selections && \
