@@ -1,5 +1,13 @@
 # RClone Share Tools
 
+## Try it out!
+
+Go to https://gitpod.io/settings/ and create an environment variable `RCLONE_CONF` set to your base64 encoded rclone.conf file. Remember that all new lines should be removed. Your environment variable will remain encrypted and private to your container. (Read more here https://www.gitpod.io/docs/environment-variables/)
+
+Now, click below to try it out:
+
+[![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://gitlab.com/Xangelix/rcst)
+
 ## Prerequisites
 
 - KDE Plasma ^5 (tested on 5.20.4) 
