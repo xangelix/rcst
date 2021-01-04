@@ -7,7 +7,7 @@ def debug(str):
         print(str)
 
 # Imports
-import os, subprocess, json, datetime
+import os, subprocess, json, datetime, re
 import argparse, pyperclip
 
 working_dir = os.path.dirname(os.path.realpath(__file__))
@@ -32,11 +32,13 @@ parser = argparse.ArgumentParser()
 parser.add_argument('file_path')
 parser.add_argument('dst_route')
 parser.add_argument('dst_dir')
+parser.add_argument('--exp', type=str, default='0')
 args = parser.parse_args()
 
 file_path = args.file_path
 dst_route = args.dst_route + ':'
 dst_dir = args.dst_dir
+exp_time = args.exp
 
 #TODO: Account for spaces in file path
 
@@ -73,25 +75,40 @@ if 'uploads' not in history:
 
 upload = {}
 utc_now = datetime.datetime.now(datetime.timezone.utc)
-upload.update({'upload_time': utc_now.strftime("UTC-%Y-%m-%d-%H-%S-%f")})
 
-exp_day = 0
-exp_hour = 5
-exp_min = 0
-exp_sec = 0
 
-exp_day_delta = datetime.timedelta(days=exp_day)
-exp_hour_delta = datetime.timedelta(hours=exp_hour)
-exp_min_delta = datetime.timedelta(minutes=exp_min)
-exp_sec_delta = datetime.timedelta(days=exp_sec)
+exp_sec = exp_min = exp_hour = exp_day = exp_week = exp_month = exp_year = 0
+exp_unit = exp_time[-1]
 
-total_time_delta = exp_day_delta + exp_hour_delta + exp_min_delta + exp_sec_delta
 
-if (total_time_delta == 0):
+time_units = ['s', 'm', 'h', 'd', 'w', 'n', 'y']
+time_inputs = {}
+for unit in time_units:
+    time_inputs.update({unit: 0})
+
+debug(exp_time)
+
+tu = ''.join(re.findall(r'[a-zA-Z]', exp_time))
+
+debug(tu)
+
+time_inputs[tu] = int(exp_time[0:-1])
+
+# TODO: Months are always 4 weeks
+# TODO: Years are always 365 days
+
+time_delta = datetime.timedelta(seconds=time_inputs['s'],
+                                minutes=time_inputs['m'],
+                                hours=time_inputs['h'],
+                                days=(time_inputs['y'] * 365) + time_inputs['d'],
+                                weeks=(time_inputs['n'] * 4) + time_inputs['w'])
+
+upload.update({'upload_time': utc_now.strftime("UTC-%Y-%m-%d-%H-%M-%S-%f")})
+if (time_delta == 0):
     upload.update({'expiration': 'none'})
 else:
-    exp_now = utc_now + total_time_delta
-    upload.update({'expiration': exp_now.strftime("UTC-%Y-%m-%d-%H-%S-%f")})
+    exp_now = utc_now + time_delta
+    upload.update({'expiration': exp_now.strftime("UTC-%Y-%m-%d-%H-%M-%S-%f")})
 
 upload.update({'link': rc_link})
 upload.update({'name': basename})
