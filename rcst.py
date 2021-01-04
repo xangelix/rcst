@@ -88,27 +88,29 @@ for unit in time_units:
 
 debug(exp_time)
 
-tu = ''.join(re.findall(r'[a-zA-Z]', exp_time))
+try:
+    tu = ''.join(re.findall(r'[a-zA-Z]', exp_time))
 
-debug(tu)
+    debug(tu)
 
-time_inputs[tu] = int(exp_time[0:-1])
+    time_inputs[tu] = int(exp_time[0:-1])
 
-# TODO: Months are always 4 weeks
-# TODO: Years are always 365 days
+    # TODO: Months are always 4 weeks
+    # TODO: Years are always 365 days
 
-time_delta = datetime.timedelta(seconds=time_inputs['s'],
-                                minutes=time_inputs['m'],
-                                hours=time_inputs['h'],
-                                days=(time_inputs['y'] * 365) + time_inputs['d'],
-                                weeks=(time_inputs['n'] * 4) + time_inputs['w'])
+    time_delta = datetime.timedelta(seconds=time_inputs['s'],
+                                    minutes=time_inputs['m'],
+                                    hours=time_inputs['h'],
+                                    days=(time_inputs['y'] * 365) + time_inputs['d'],
+                                    weeks=(time_inputs['n'] * 4) + time_inputs['w'])
 
-upload.update({'upload_time': utc_now.strftime("UTC-%Y-%m-%d-%H-%M-%S-%f")})
-if (time_delta == 0):
-    upload.update({'expiration': 'none'})
-else:
     exp_now = utc_now + time_delta
     upload.update({'expiration': exp_now.strftime("UTC-%Y-%m-%d-%H-%M-%S-%f")})
+
+except:
+    upload.update({'expiration': 'none'})
+
+upload.update({'upload_time': utc_now.strftime("UTC-%Y-%m-%d-%H-%M-%S-%f")})
 
 upload.update({'link': rc_link})
 upload.update({'name': basename})
