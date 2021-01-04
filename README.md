@@ -122,5 +122,3 @@ Please see [the full list of all storage providers and their features](https://r
 ## Known Issues
 
 Plenty
-
-SEVERE: `pkexec --user root` needs to be supplemented, issues on Ubuntu focal
