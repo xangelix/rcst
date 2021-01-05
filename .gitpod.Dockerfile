@@ -1,5 +1,5 @@
 FROM gitpod/workspace-full:latest
-MAINTAINER Cody Neiman <cody.neiman@yale.edu>
+LABEL maintainer="Cody Neiman <cody.neiman@yale.edu>"
 
 # Install Xvfb, JavaFX-helpers and Openbox window manager
 RUN sudo apt-get update && \
