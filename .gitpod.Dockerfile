@@ -56,3 +56,5 @@ RUN sudo apt update && sudo apt upgrade -yq && python -m pip install --upgrade p
     sudo apt install -yq rclone libnotify-bin
 
 ENV XDG_SESSION_TYPE="x11"
+
+RUN pip install black
