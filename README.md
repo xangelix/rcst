@@ -41,25 +41,9 @@ python -m pip install -r requirements.txt
 
 Right click on any file
 
-## TODO (sort by priority)
+## Roadmap
 
-- Delete destination support
-- Fix for spaces in name
-- Debug catch and verbosity
-- Folder upload support
-- Multi-file upload support
-- Add destination support
-- AUR-based installer
-- Add additional metadata to history log
-- Directory organization on dst
-- Local copy options
-- Hash-check support
-- Save backup of history in case fails
-- Uploading file to same path modifies file but keeps link the same
-- JSON Schema definition
-- Combine json defaults file into config
-- Type checking
-- Fix exception rules
+[View Issues for Planned Updates](https://gitlab.com/Xangelix/rcst/-/issues)
 
 ## Storage providers
 
