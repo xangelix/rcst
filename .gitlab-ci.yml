@@ -73,7 +73,6 @@ build_windows_x64_debug:
     - .\\flutter\\bin\\flutter doctor -v
     - .\\flutter\\bin\\flutter pub get
     - .\\flutter\\bin\\flutter build windows --debug
-    - dir .\\build\\windows\\
     - 7z a -t7z -m0=lzma2 -mx=9 -mfb=64 -md=32m -ms=on .\\build\\windows_x64_debug.7z  .\\build\\windows\\runner\\Debug\\*
   artifacts:
     paths:
