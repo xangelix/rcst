@@ -1,0 +1,34 @@
+stages:
+  - build
+
+build_web:
+  stage: build
+  image: cirrusci/flutter:beta
+  before_script:
+    - sudo apt-get update -qy
+    - sudo apt-get install -y p7zip-full
+  script:
+    - flutter config --enable-web
+    - flutter doctor -v
+    - flutter build web --profile
+    - cd build/web
+    - 7z a -r ../web_debug.zip ./*
+  artifacts:
+    paths:
+    - build/web_debug.zip
+
+#build_android:
+#  stage: build
+#
+#build_ios:
+#  stage: build
+#
+#build_linux:
+#  stage: build
+#
+#build_windows:
+#  stage: build
+#
+#build_macos:
+#  stage: build
+#  
