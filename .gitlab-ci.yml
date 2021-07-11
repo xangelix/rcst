@@ -52,12 +52,13 @@ build_windows_debug:
     - git clone -b master https://github.com/flutter/flutter.git
     - .\\flutter\\bin\\flutter --version
     - .\\flutter\\bin\\flutter channel beta
+    - .\\flutter\\bin\\flutter upgrade
     - .\\flutter\\bin\\flutter config --enable-windows-desktop
     - .\\flutter\\bin\\flutter doctor -v
     - .\\flutter\\bin\\flutter pub get
     - .\\flutter\\bin\\flutter build windows --debug
     - dir .\\build\\windows\\
-    - 7z a -t7z -m0=lzma2 -mx=9 -mfb=64 -md=32m -ms=on .\\build\\windows_x64_debug.7z  .\\build\\windows\\x64\\debug\\*
+    - 7z a -t7z -m0=lzma2 -mx=9 -mfb=64 -md=32m -ms=on .\\build\\windows_x64_debug.7z  .\\build\\windows\\runner\\Debug\\*
   artifacts:
     paths:
       - .\\build\\windows_x64_debug.7z
