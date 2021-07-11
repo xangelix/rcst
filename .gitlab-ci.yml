@@ -11,11 +11,10 @@ build_web:
     - flutter config --enable-web
     - flutter doctor -v
     - flutter build web --profile
-    - cd build/web
-    - 7z a -r ../web_debug.zip ./*
+    - 7z a -t7z -m0=lzma2 -mx=9 -mfb=64 -md=32m -ms=on ./build/web_debug.7z ./build/web/*
   artifacts:
     paths:
-    - build/web_debug.zip
+    - build/web_debug.7z
 
 #build_android:
 #  stage: build
