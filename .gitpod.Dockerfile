@@ -3,6 +3,8 @@ LABEL maintainer "Cody Neiman <cody-neiman@cody.fun>"
 
 SHELL ["/bin/bash", "-c"]
 
+RUN sudo apt update && sudo apt upgrade -yq && sudo apt install libgtk-3-dev
+
 RUN sudo git clone --branch beta https://github.com/flutter/flutter.git /workspace/flutter
 
 RUN sudo chown -R gitpod /workspace/flutter/
