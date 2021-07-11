@@ -6,9 +6,8 @@ build_web:
   image: cirrusci/flutter:beta
   before_script:
     - sudo apt-get update -qy
-    - sudo apt-get upgrade -y
+    - sudo apt-get upgrade -qy
     - sudo apt-get install -y p7zip-full
-    - flutter channel beta
   script:
     - flutter config --enable-web
     - flutter doctor -v
@@ -24,9 +23,8 @@ build_linux:
   image: cirrusci/flutter:beta
   before_script:
     - sudo apt-get update -qy
-    - sudo apt-get upgrade -y
+    - sudo apt-get upgrade -qy
     - sudo apt-get install -y clang p7zip-full rsync
-    - flutter channel beta
   script:
     - flutter config --enable-linux-desktop
     - flutter doctor -v
