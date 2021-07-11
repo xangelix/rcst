@@ -1,7 +1,7 @@
 FROM gitpod/workspace-full:latest
 LABEL maintainer "Cody Neiman <cody-neiman@cody.fun>"
 
-RUN sudo apt update && sudo apt upgrade -yq
+SHELL ["/bin/bash", "-c"]
 
 RUN sudo git clone --branch beta https://github.com/flutter/flutter.git /workspace/flutter
 
