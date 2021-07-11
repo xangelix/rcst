@@ -16,7 +16,7 @@ build_web:
     - 7z a -t7z -m0=lzma2 -mx=9 -mfb=64 -md=32m -ms=on ./build/web_debug.7z ./build/web/*
   artifacts:
     paths:
-    - build/web_debug.7z
+    - ./build/web_debug.7z
 
 build_linux_x64:
   stage: build
@@ -33,7 +33,35 @@ build_linux_x64:
     - 7z a -t7z -m0=lzma2 -mx=9 -mfb=64 -md=32m -ms=on ./build/linux_x64_debug.7z ./build/linux/x64/debug/*
   artifacts:
     paths:
-      - build/linux_x64_debug.7z
+      - ./build/linux_x64_debug.7z
+
+.shared_windows_runners:
+  tags:
+  - shared-windows
+  - windows
+  - windows-1809
+
+build_windows_debug:
+  extends:
+    - .shared_windows_runners
+  stage: build
+  before_script:
+    - choco feature enable -n allowGlobalConfirmation
+    - choco install git visualstudio2019-workload-nativedesktop windows-sdk-10-version-1809-all
+  script:
+    - git clone -b master https://github.com/flutter/flutter.git
+    - .\\flutter\\bin\\flutter --version
+    - .\\flutter\\bin\\flutter channel beta
+    - .\\flutter\\bin\\flutter config --enable-windows-desktop
+    - .\\flutter\\bin\\flutter doctor -v
+    - .\\flutter\\bin\\flutter pub get
+    - .\\flutter\\bin\\flutter build windows --debug
+    - cd build\\windows\\debug
+    - 7z a -t7z -m0=lzma2 -mx=9 -mfb=64 -md=32m -ms=on .\\build\\linux_x64_debug.7z  .\\build\\windows\\debug\\*
+  artifacts:
+    paths:
+      - .\\build\\linux_x64_debug.7z
+
 
 #build_android:
 #  stage: build
