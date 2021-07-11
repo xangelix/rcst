@@ -1,6 +1,13 @@
 image:
   file: .gitpod.Dockerfile
 
+vscode:
+  extensions:
+    - dart-code.dart-code
+    - dart-code.flutter
+    - nash.awesome-flutter-snippets
+    - ms-azuretools.vscode-docker
+
 tasks:
   - command: |
       mkdir -p /home/gitpod/.ssh/
