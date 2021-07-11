@@ -1,7 +1,7 @@
 stages:
   - build
 
-build_web:
+build_web_profile:
   stage: build
   image: cirrusci/flutter:beta
   before_script:
@@ -34,7 +34,7 @@ build_android_debug:
     paths:
       - ./build/android_debug.7z
 
-build_linux_x64:
+build_linux_x64_debug:
   stage: build
   image: cirrusci/flutter:beta
   before_script:
@@ -57,7 +57,7 @@ build_linux_x64:
   - windows
   - windows-1809
 
-build_windows_debug:
+build_windows_x64_debug:
   extends:
     - .shared_windows_runners
   stage: build
