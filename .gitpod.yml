@@ -11,4 +11,5 @@ vscode:
 
 tasks:
   - command: |
+      flutter pub get
       bash ./.gitpod.init_signing.sh
