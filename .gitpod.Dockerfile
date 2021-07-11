@@ -5,6 +5,8 @@ RUN sudo apt update && sudo apt upgrade -yq
 
 RUN sudo git clone --branch beta https://github.com/flutter/flutter.git /workspace/flutter
 
+RUN sudo chown -R gitpod /workspace/flutter/
+
 RUN /workspace/flutter/bin/flutter --version && \
     /workspace/flutter/bin/flutter config --enable-linux-desktop && \
     /workspace/flutter/bin/flutter doctor -v 
