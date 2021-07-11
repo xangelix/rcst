@@ -11,5 +11,4 @@ vscode:
 
 tasks:
   - command: |
-      chmod +x ./.gitpod.init_signing.sh
       bash ./.gitpod.init_signing.sh
