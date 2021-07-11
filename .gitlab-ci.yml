@@ -57,10 +57,10 @@ build_windows_debug:
     - .\\flutter\\bin\\flutter pub get
     - .\\flutter\\bin\\flutter build windows --debug
     - dir .\\build\\windows\\
-    - 7z a -t7z -m0=lzma2 -mx=9 -mfb=64 -md=32m -ms=on .\\build\\linux_x64_debug.7z  .\\build\\windows\\debug\\*
+    - 7z a -t7z -m0=lzma2 -mx=9 -mfb=64 -md=32m -ms=on .\\build\\windows_x64_debug.7z  .\\build\\windows\\x64\\debug\\*
   artifacts:
     paths:
-      - .\\build\\linux_x64_debug.7z
+      - .\\build\\windows_x64_debug.7z
 
 
 #build_android:
