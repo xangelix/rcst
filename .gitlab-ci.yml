@@ -6,23 +6,39 @@ build_web:
   image: cirrusci/flutter:beta
   before_script:
     - sudo apt-get update -qy
+    - sudo apt-get upgrade -y
     - sudo apt-get install -y p7zip-full
   script:
     - flutter config --enable-web
     - flutter doctor -v
+    - flutter pub get
     - flutter build web --profile
     - 7z a -t7z -m0=lzma2 -mx=9 -mfb=64 -md=32m -ms=on ./build/web_debug.7z ./build/web/*
   artifacts:
     paths:
     - build/web_debug.7z
 
+build_linux:
+  stage: build
+  before_script:
+  - sudo apt-get update -qy
+  - sudo apt-get upgrade -y
+  - sudo apt-get install -y clang p7zip-full rsync
+  script:
+    - flutter channel master
+    - flutter config --enable-linux-desktop
+    - flutter doctor -v
+    - flutter pub get
+    - flutter build linux --debug
+    - 7z a -t7z -m0=lzma2 -mx=9 -mfb=64 -md=32m -ms=on ./build/linux_debug.7z ./build/linux/debug/*
+  artifacts:
+    paths:
+      - build/linux_debug.7z
+
 #build_android:
 #  stage: build
 #
 #build_ios:
-#  stage: build
-#
-#build_linux:
 #  stage: build
 #
 #build_windows:
