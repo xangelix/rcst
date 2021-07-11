@@ -3,8 +3,9 @@ LABEL maintainer "Cody Neiman <cody-neiman@cody.fun>"
 
 RUN sudo apt update && sudo apt upgrade -yq
 
-RUN sudo git clone --depth 1 --branch beta https://github.com/flutter/flutter.git /workspace/flutter && \
-    ../flutter/bin/flutter --version && \
+RUN sudo git clone --depth 1 --branch beta https://github.com/flutter/flutter.git /workspace/flutter
+
+RUN ../flutter/bin/flutter --version && \
     ../flutter/bin/flutter config --enable-linux-desktop && \
     ../flutter/bin/flutter doctor -v 
 
