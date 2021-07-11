@@ -18,6 +18,22 @@ build_web:
     paths:
     - ./build/web_debug.7z
 
+build_android_debug:
+  stage: build
+  image: cirrusci/flutter:beta
+  before_script:
+    - sudo apt-get update -qy
+    - sudo apt-get upgrade -qy
+    - sudo apt-get install -y p7zip-full
+  script:
+    - flutter doctor -v
+    - flutter pub get
+    - flutter build apk --debug
+    - 7z a -t7z -m0=lzma2 -mx=9 -mfb=64 -md=32m -ms=on ./build/android_debug.7z ./build/app/outputs/flutter-apk/*
+  artifacts:
+    paths:
+      - ./build/android_debug.7z
+
 build_linux_x64:
   stage: build
   image: cirrusci/flutter:beta
@@ -63,14 +79,7 @@ build_windows_debug:
     paths:
       - .\\build\\windows_x64_debug.7z
 
-
-#build_android:
-#  stage: build
-#
 #build_ios:
-#  stage: build
-#
-#build_windows:
 #  stage: build
 #
 #build_macos:
