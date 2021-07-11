@@ -20,6 +20,7 @@ build_web:
 
 build_linux:
   stage: build
+  image: cirrusci/flutter:beta
   before_script:
   - sudo apt-get update -qy
   - sudo apt-get upgrade -y
