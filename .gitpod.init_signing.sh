@@ -3,6 +3,7 @@
 mkdir -p /home/gitpod/.ssh/
 echo $SSH_KEY_B64 | base64 -di > /home/gitpod/.ssh/id_rsa
 echo "--SSH Private Key Imported--"
+echo "IF YOU ENTER PASSSWORD WRONG, RUN: './.gitpod.init_signing.sh'"
 echo $GPG_KEY_B64 | base64 -di > /home/gitpod/pkey.key
 gpg --pinentry-mode=loopback --import /home/gitpod/pkey.key
 echo "--GPG Private Key Imported--"
