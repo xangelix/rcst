@@ -8,6 +8,16 @@ vscode:
     - nash.awesome-flutter-snippets
     - ms-azuretools.vscode-docker
     - valentjn.vscode-ltex
+    - ms-vscode.cmake-tools
+    - editorconfig.editorconfig
+    - eamodio.gitlens
+    - donjayamanne.githistory
+    - oderwat.indent-rainbow
+    - ritwickdey.liveserver
+    - christian-kohler.path-intellisense
+    - humao.rest-client
+    - pflannery.vscode-versionlens
+    - dotjoshjohnson.xml
 
 tasks:
   - command: |
