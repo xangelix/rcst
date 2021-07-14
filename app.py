@@ -4,7 +4,7 @@ import base64
 
 import boto3
 
-from flask import Flask, jsonify, request
+from flask import Flask, jsonify, request, make_response
 app = Flask(__name__)
 
 USERS_TABLE = os.environ['USERS_TABLE']
@@ -100,3 +100,7 @@ def create_user():
     'display_name': display_name,
     'email':        email
   })
+
+@app.errorhandler(404)
+def resource_not_found(e):
+    return make_response(jsonify(error='Not found!'), 404)
