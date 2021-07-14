@@ -43,11 +43,14 @@ provider:
     USERS_TABLE: ${self:custom.tableName}
 
 functions:
-  app:
+  login:
     handler: wsgi_handler.handler
     events:
-      - http: ANY /
-      - http: 'ANY /{proxy+}'
+      - http: 'GET /login'
+  register:
+    handler: wsgi_handler.handler
+    events:
+      - http: 'POST /register'
 
 resources:
   Resources:
