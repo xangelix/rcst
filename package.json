@@ -1,0 +1,25 @@
+{
+  "name": "rcst",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://gitlab.com/Xangelix/rcst.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://gitlab.com/Xangelix/rcst/issues"
+  },
+  "homepage": "https://gitlab.com/Xangelix/rcst#readme",
+  "devDependencies": {
+    "serverless-dynamodb-local": "^0.2.40",
+    "serverless-python-requirements": "^5.1.1",
+    "serverless-wsgi": "^1.7.8"
+  }
+}
