@@ -49,7 +49,7 @@ functions:
   login:
     handler: wsgi_handler.handler
     events:
-      - http: 'GET /login'
+      - http: 'POST /login'
   register:
     handler: wsgi_handler.handler
     events:

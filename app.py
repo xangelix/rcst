@@ -24,7 +24,7 @@ else:
 def hello():
   return "Hello World!"
 
-@app.route("/login", methods=["GET"])
+@app.route("/login", methods=["POST"])
 def get_user():
   print("getting")
   username =    request.json.get('username')
