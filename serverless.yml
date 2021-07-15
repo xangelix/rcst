@@ -8,6 +8,7 @@ plugins:
   - serverless-python-requirements
   - serverless-wsgi
   - serverless-dynamodb-local
+  - serverless-associate-waf
 
 custom:
   tableName: 'users-table-${self:provider.stage}'
@@ -22,6 +23,9 @@ custom:
       - dev
     start:
       migrate: true
+  associateWaf:
+    name: api-libre-red-waf
+    version: V2
 
 provider:
   name: aws
