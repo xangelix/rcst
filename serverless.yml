@@ -1,6 +1,6 @@
 org: xangelix
-app: serverless-flask
-service: serverless-flask
+app: serverless-rcst
+service: serverless-rcst
 
 configValidationMode: error
 
@@ -9,9 +9,10 @@ plugins:
   - serverless-wsgi
   - serverless-dynamodb-local
   - serverless-associate-waf
+  - serverless-domain-manager
 
 custom:
-  tableName: 'users-table-${self:provider.stage}'
+  tableName: 'users-table-dev'
   wsgi:
     app: app.app
     packRequirements: false
@@ -19,8 +20,6 @@ custom:
     dockerizePip: non-linux
     pythonBin: python3
   dynamodb:
-    stages:
-      - dev
     start:
       migrate: true
   associateWaf:
@@ -38,7 +37,6 @@ custom:
 provider:
   name: aws
   runtime: python3.8
-  stage: dev
   region: us-east-1
   lambdaHashingVersion: "20201221"
   iam:
