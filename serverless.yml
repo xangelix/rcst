@@ -26,6 +26,14 @@ custom:
   associateWaf:
     name: api-libre-red-waf
     version: V2
+  customDomain:
+    domainName: api.clone-engine.com
+    certificateName: '*.clone-engine.com'
+    securityPolicy: tls_1_2
+    basePath: ''
+    createRoute53Record: true
+    endpointType: 'regional'
+    autoDomain: true
 
 provider:
   name: aws
