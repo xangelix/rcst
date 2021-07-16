@@ -17,20 +17,13 @@ if IS_OFFLINE:
         endpoint_url='http://localhost:8000'
     )
 else:
-    print("WARN: provisioning")
     client = boto3.client('dynamodb')
-
-@app.route("/")
-def hello():
-  return "Hello World!"
 
 @app.route("/login", methods=["POST"])
 def get_user():
-  print("getting")
   username    = request.json.get('username')
   in_password = request.json.get('password')
 
-  #if not [x for x in (username, password) if x is None]:
   if not username or not in_password:
     return jsonify({'error': 'Please provide username and password.'}), 400
 
@@ -65,14 +58,11 @@ def get_user():
 
 @app.route("/register", methods=["POST"])
 def create_user():
-  print("posting")
-
   username     = request.json.get('username')
   password     = request.json.get('password')
   display_name = request.json.get('display_name')
   email        = request.json.get('email')
 
-  #if not [x for x in (username, password, display_name, email) if x is None]:
   if not username or not password or not display_name or not email:
     return jsonify({'error': 'Please provide username, password, display_name, and email.'}), 400
 
