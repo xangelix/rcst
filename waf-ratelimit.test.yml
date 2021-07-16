@@ -1,0 +1,12 @@
+config:
+  target: "https://api.clone-engine.com"
+  phases:
+    - duration: 10
+      arrivalRate: 100
+scenarios:
+  - flow:
+    - post:
+        url: "/login"
+        json:
+          username: "wow1"
+          password: "ok"
