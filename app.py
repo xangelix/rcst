@@ -27,7 +27,7 @@ def hello():
 @app.route("/login", methods=["POST"])
 def get_user():
   print("getting")
-  username =    request.json.get('username')
+  username    = request.json.get('username')
   in_password = request.json.get('password')
 
   #if not [x for x in (username, password) if x is None]:
@@ -67,10 +67,10 @@ def get_user():
 def create_user():
   print("posting")
 
-  username =     request.json.get('username')
-  password =     request.json.get('password')
+  username     = request.json.get('username')
+  password     = request.json.get('password')
   display_name = request.json.get('display_name')
-  email =        request.json.get('email')
+  email        = request.json.get('email')
 
   #if not [x for x in (username, password, display_name, email) if x is None]:
   if not username or not password or not display_name or not email:
