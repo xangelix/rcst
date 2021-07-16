@@ -5,10 +5,10 @@ import base64
 import boto3
 
 from flask import Flask, jsonify, request, make_response
-app = Flask(__name__)
+app: Flask = Flask(__name__)
 
-USERS_TABLE = os.environ['USERS_TABLE']
-IS_OFFLINE = os.environ.get('IS_OFFLINE')
+USERS_TABLE: str = os.environ['USERS_TABLE']
+IS_OFFLINE: str = os.environ.get('IS_OFFLINE')
 
 if IS_OFFLINE:
     client = boto3.client(
@@ -21,8 +21,8 @@ else:
 
 @app.route("/login", methods=["POST"])
 def get_user():
-  username    = request.json.get('username')
-  in_password = request.json.get('password')
+  username: str    = request.json.get('username')
+  in_password: str = request.json.get('password')
 
   if not username or not in_password:
     return jsonify({'error': 'Please provide username and password.'}), 400
@@ -38,10 +38,10 @@ def get_user():
   if not item:
     return jsonify({'error': 'Could not find user'}), 404
 
-  password = item.get('password').get('S')
-  salt = item.get('salt').get('S')
+  password:     str = item.get('password').get('S')
+  encoded_salt: str = item.get('salt').get('S')
 
-  salt = base64.b64decode(salt)
+  salt: bytes = base64.b64decode(encoded_salt)
 
   in_password = hashlib.pbkdf2_hmac('sha512', bytes(in_password, encoding="ascii"), salt, 100000).hex()
 
@@ -49,11 +49,11 @@ def get_user():
     return jsonify({'error': 'Could not authenticate'}), 401
 
   return jsonify({
-    'username':     item.get('username').get('S'),
-    'password':     item.get('password').get('S'),
-    'salt':         item.get('salt').get('S'),
+    'username':     item.get('username')    .get('S'),
+    'password':     item.get('password')    .get('S'),
+    'salt':         item.get('salt')        .get('S'),
     'display_name': item.get('display_name').get('S'),
-    'email':        item.get('email').get('S')
+    'email':        item.get('email')       .get('S')
   })
 
 @app.route("/register", methods=["POST"])
