@@ -1,106 +1,98 @@
+from typing import Optional
+
 import os
 import hashlib
 import base64
 
 import boto3
 
-from flask import Flask, jsonify, request, make_response
-app = Flask(__name__)
+from fastapi import FastAPI, HTTPException, status 
+from pydantic import BaseModel, EmailStr
 
-USERS_TABLE = os.environ['USERS_TABLE']
-IS_OFFLINE = os.environ.get('IS_OFFLINE')
+USERS_TABLE: str = os.environ['USERS_TABLE']
+IS_OFFLINE: str = os.environ.get('IS_OFFLINE')
 
 if IS_OFFLINE:
-    client = boto3.client(
-        'dynamodb',
-        region_name='localhost',
-        endpoint_url='http://localhost:8000'
-    )
+  client = boto3.client(
+    'dynamodb',
+    region_name='localhost',
+    endpoint_url='http://localhost:8000'
+  )
 else:
-    print("WARN: provisioning")
-    client = boto3.client('dynamodb')
+  client = boto3.client('dynamodb')
 
-@app.route("/")
-def hello():
-  return "Hello World!"
+# Requests
+class LoginRequest(BaseModel):
+  username: EmailStr
+  password: str
 
-@app.route("/login", methods=["POST"])
-def get_user():
-  print("getting")
-  username =    request.json.get('username')
-  in_password = request.json.get('password')
+class RegistrationRequest(BaseModel):
+  username:     EmailStr
+  password:     str
+  display_name: str
 
-  #if not [x for x in (username, password) if x is None]:
-  if not username or not in_password:
-    return jsonify({'error': 'Please provide username and password.'}), 400
+# Responses
+class UserInfo(BaseModel):
+  username:     EmailStr
+  password:     str
+  salt:         str
+  display_name: str
 
-  resp = client.get_item(
+app = FastAPI()
+
+@app.post("/login", response_model=UserInfo, status_code=status.HTTP_200_OK)
+def get_account(login_request: LoginRequest):
+  db_get = client.get_item(
     TableName=USERS_TABLE,
     Key={
-      'username': {'S': username}
+      'username': {'S': login_request.username}
     }
   )
 
-  item = resp.get('Item')
+  item = db_get.get('Item')
+
   if not item:
-    return jsonify({'error': 'Could not find user'}), 404
+    raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="User not found.")
 
   password = item.get('password').get('S')
-  salt = item.get('salt').get('S')
+  request_salt = item.get('salt').get('S')
 
-  salt = base64.b64decode(salt)
+  request_salt = base64.b64decode(request_salt)
 
-  in_password = hashlib.pbkdf2_hmac('sha512', bytes(in_password, encoding="ascii"), salt, 100000).hex()
+  request_hash = hashlib.pbkdf2_hmac('sha512', bytes(login_request.password, encoding="ascii"), request_salt, 100000).hex()
 
-  if not (password == in_password):
-    return jsonify({'error': 'Could not authenticate'}), 401
+  if not (password == request_hash):
+    raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="Could not authenticate.")
 
-  return jsonify({
+  return {
     'username':     item.get('username').get('S'),
     'password':     item.get('password').get('S'),
     'salt':         item.get('salt').get('S'),
     'display_name': item.get('display_name').get('S'),
     'email':        item.get('email').get('S')
-  })
+  }
 
-@app.route("/register", methods=["POST"])
-def create_user():
-  print("posting")
-
-  username =     request.json.get('username')
-  password =     request.json.get('password')
-  display_name = request.json.get('display_name')
-  email =        request.json.get('email')
-
-  #if not [x for x in (username, password, display_name, email) if x is None]:
-  if not username or not password or not display_name or not email:
-    return jsonify({'error': 'Please provide username, password, display_name, and email.'}), 400
-
-  salt = os.urandom(32)
+@app.post("/register", response_model=UserInfo, status_code=status.HTTP_201_CREATED)
+def create_user(regis_request: RegistrationRequest):
+  request_salt = os.urandom(32)
   
-  password = hashlib.pbkdf2_hmac('sha512', bytes(password, encoding="ascii"), salt, 100000).hex()
+  request_hash = hashlib.pbkdf2_hmac('sha512', bytes(regis_request.password, encoding="ascii"), request_salt, 100000).hex()
 
-  salt = str(base64.b64encode(salt), encoding="ascii")
+  request_salt = str(base64.b64encode(request_salt), encoding="ascii")
 
   resp = client.put_item(
     TableName=USERS_TABLE,
     Item={
-      'username':     {'S': username},
-      'password':     {'S': password},
-      'salt':         {'S': salt},
-      'display_name': {'S': display_name},
-      'email':        {'S': email}
+      'username':     {'S': regis_request.username},
+      'password':     {'S': request_hash},
+      'salt':         {'S': request_salt},
+      'display_name': {'S': regis_request.display_name},
     }
   )
 
-  return jsonify({
-    'username':     username,
-    'password':     password,
-    'salt':         salt,
-    'display_name': display_name,
-    'email':        email
-  })
-
-@app.errorhandler(404)
-def resource_not_found(e):
-    return make_response(jsonify(error='Not found!'), 404)
+  return {
+    'username':     regis_request.username,
+    'password':     request_hash,
+    'salt':         request_salt,
+    'display_name': regis_request.display_name,
+  }
