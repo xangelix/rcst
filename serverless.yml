@@ -20,6 +20,8 @@ custom:
     dockerizePip: non-linux
     pythonBin: python3
   dynamodb:
+    stages:
+      - dev
     start:
       migrate: true
   associateWaf:
