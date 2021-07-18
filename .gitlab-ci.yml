@@ -81,6 +81,23 @@ build_windows_x64_debug:
     paths:
       - .\\build\\windows_x64_debug.7z
 
+build_macos_x64_debug:
+  stage: build
+  tags: macos
+  before_script:
+    - flutter channel beta
+    - flutter upgrade
+  script:
+    - flutter --version
+    - flutter config --enable-macos-desktop
+    - flutter doctor -v
+    - flutter pub get
+    - flutter build macos --debug
+    - 7z a -t7z -m0=lzma2 -mx=9 -mfb=64 -md=32m -ms=on ./build/macos_x64_debug.7z  ./build/macos/Build/Products/Debug/*
+  artifacts:
+    paths:
+      - ./build/macos_x64_debug.7z
+
 #build_ios:
 #  stage: build
 #
