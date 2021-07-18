@@ -83,7 +83,7 @@ build_windows_x64_debug:
 
 build_macos_x64_debug:
   stage: build
-  tags: macos
+  tags: ['macos']
   before_script:
     - flutter channel beta
     - flutter upgrade
