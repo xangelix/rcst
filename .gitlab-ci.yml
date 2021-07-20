@@ -98,7 +98,7 @@ build_macos_x64_debug:
     paths:
       - ./build/macos_x64_debug.7z
 
-build_ios:
+build_ios_debug:
   stage: build
   tags: ['macos']
   before_script:
