@@ -98,15 +98,18 @@ build_macos_x64_debug:
     paths:
       - ./build/macos_x64_debug.7z
 
-#build_ios:
-#  stage: build
-#  tags: ['macos']
-#  before_script:
-#    - flutter channel beta
-#    - flutter upgrade
-#  script:
-#    - flutter --version
-#    - flutter doctor -v
-#    - flutter pub get
-#    - flutter build ios --debug
-#
+build_ios:
+  stage: build
+  tags: ['macos']
+  before_script:
+    - flutter channel beta
+    - flutter upgrade
+  script:
+    - flutter --version
+    - flutter doctor -v
+    - flutter pub get
+    - flutter build ios --debug
+    - 7z a -t7z -m0=lzma2 -mx=9 -mfb=64 -md=32m -ms=on ./build/ios_debug.7z  ./build/ios/iphoneos/*
+  artifacts:
+    paths:
+      - ./build/ios_debug.7z
